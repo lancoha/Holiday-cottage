@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Holiday Cottage in Forest Paradise</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+  />
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-text">
+      <h1>Holiday Cottage in Forest Paradise</h1>
+      <h2>Črni Vrh nad Idrijo, Slovenia</h2>
+    </div>
+    <div class="gallery section" id="gallery">
+      <div class="gallery-grid">
+        <div class="gallery-item"><img src="images/1.png"  alt="Cottage exterior view" /></div>
+        <div class="gallery-item"><img src="images/3.jpg"  alt="Aerial view"            /></div>
+        <div class="gallery-item"><img src="images/4.jpg"  alt="Living area"           /></div>
+        <div class="gallery-item"><img src="images/5.jpg"  alt="Private sauna"         /></div>
+        <div class="gallery-item"><img src="images/10.jpg" alt="Cottage exterior view" /></div>
+        <div class="gallery-item"><img src="images/12.jpg" alt="Aerial view"            /></div>
+        <div class="gallery-item"><img src="images/13.jpg" alt="Living area"           /></div>
+        <div class="gallery-item"><img src="images/16.jpg" alt="Private sauna"         /></div>
+        <div class="gallery-item"><img src="images/17.jpg" alt="Cottage exterior view" /></div>
+        <div class="gallery-item"><img src="images/18.jpg" alt="Aerial view"            /></div>
+        <div class="gallery-item"><img src="images/19.jpg" alt="Living area"           /></div>
+        <div class="gallery-item"><img src="images/20.jpg" alt="Private sauna"         /></div>
+        <div class="gallery-item"><img src="images/21.jpg" alt="Cottage exterior view" /></div>
+        <div class="gallery-item"><img src="images/22.jpg" alt="Aerial view"            /></div>
+        <div class="gallery-item"><img src="images/23.jpg" alt="Living area"           /></div>
+        <div class="gallery-item"><img src="images/24.jpg" alt="Private sauna"         /></div>
+      </div>
+      <button class="btn show-all">Show all photos</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section description" id="description">
+      <h3>About this place</h3>
+      <p>
+        The holiday cottage is located 9 km from the town of Idrija, in an idyllic countryside
+        in a forest-quiet paradise, on the edge of the landscape park of Zgornja Idrijca,
+        independently next to our home house. The location is the starting point for cycling,
+        hiking, fishing in the Idrijca and Soča rivers, hunting, mushroom picking and more.
+        Next to the house (25 m away) there is the signposted Slovenska Hiking Trail Via Alpina.
+        Access to the cottage is arranged. You park your vehicle under the large covered
+        parking within the holiday cottage for free.
+      </p>
+    </section>
+
+    <section class="section amenities" id="amenities">
+      <h3>What this place offers</h3>
+      <ul class="amenities-list">
+        <li><i class="fas fa-utensils"></i>Kitchen</li>
+        <li><i class="fas fa-wifi"></i>Wi-Fi</li>
+        <li><i class="fas fa-car"></i>Free carport on premises (2 spaces)</li>
+        <li><i class="fas fa-hot-tub"></i>Private sauna</li>
+        <li><i class="fas fa-paw"></i>Pets allowed</li>
+        <li><i class="fas fa-tv"></i>HDTV with premium cable</li>
+        <li><i class="fas fa-tshirt"></i>Free washer (in unit)</li>
+        <li><i class="fas fa-dryer"></i>Free dryer (in building)</li>
+        <li><i class="fas fa-snowflake"></i>AC – split type ductless system</li>
+      </ul>
+    </section>
+
+    <section class="section location" id="location">
+      <h3>Location</h3>
+      <div id="map-container">
+        <iframe
+          id="map"
+          src="https://maps.google.com/maps?q=45.9220611,14.0452889&z=14&output=embed"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+        <button id="enable-map">Enable map interaction</button>
+      </div>
+    </section>
+
+    <section class="section booking" id="booking">
+      <h3>Availability</h3>
+      <div class="booking-content">
+        <div id="calendar"></div>
+        <div class="booking-widget">
+          <div class="price">
+            <span class="price-value">€128</span> <span>/night</span>
+          </div>
+          <div class="check-info">
+            <span>Check-in:</span> <span id="checkin">—</span>
+          </div>
+          <div class="check-info">
+            <span>Check-out:</span> <span id="checkout">—</span>
+          </div>
+          <div class="guests">
+            <label for="guests">Guests</label>
+            <select id="guests">
+              <option>1 guest</option>
+              <option selected>2 guests</option>
+              <option>3 guests</option>
+              <option>4 guests</option>
+            </select>
+          </div>
+          <button id="reserve" class="btn reserve">Reserve</button>
+          <div class="cost-summary">
+            <div class="cost-row">
+              <span>€<span id="cost-per-night">128</span> × <span id="nights">0</span> nights</span>
+              <span class="cost-total">€<span id="cost-total1">0.00</span></span>
+            </div>
+            <div class="cost-row">
+              <span>Service fee</span>
+              <span class="cost-total">€<span id="service-fee">0.00</span></span>
+            </div>
+            <div class="cost-row total">
+              <span>Total</span>
+              <span class="cost-total">€<span id="total">0.00</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="photo-modal">
+    <div class="modal-header">
+      <h3>Photo tour</h3>
+      <button id="close-modal" aria-label="Close photo tour">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="tour-grid">
+        <img src="images/1.png"  alt="Cottage exterior view 1" />
+        <img src="images/10.jpg" alt="Cottage exterior view 2" />
+        <img src="images/17.jpg" alt="Cottage exterior view 3" />
+        <img src="images/21.jpg" alt="Cottage exterior view 4" />
+        <img src="images/3.jpg"  alt="Aerial view 1" />
+        <img src="images/12.jpg" alt="Aerial view 2" />
+        <img src="images/18.jpg" alt="Aerial view 3" />
+        <img src="images/22.jpg" alt="Aerial view 4" />
+        <img src="images/4.jpg"  alt="Living area 1" />
+        <img src="images/13.jpg" alt="Living area 2" />
+        <img src="images/19.jpg" alt="Living area 3" />
+        <img src="images/23.jpg" alt="Living area 4" />
+        <img src="images/5.jpg"  alt="Private sauna 1" />
+        <img src="images/16.jpg" alt="Private sauna 2" />
+        <img src="images/20.jpg" alt="Private sauna 3" />
+        <img src="images/24.jpg" alt="Private sauna 4" />
+      </div>
+    </div>
+  </div>
+
+  <div id="lightbox" class="lightbox-overlay">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-img" src="" alt="" />
+    <button class="lightbox-prev">&#10094;</button>
+    <button class="lightbox-next">&#10095;</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="script.js"></script>
+</body>
+</html>

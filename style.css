@@ -1,0 +1,250 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: #333; }
+h1, h2, h3 { margin-bottom: .5em; }
+p { margin-bottom: 1em; }
+
+.section {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.section.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero {
+  background: #fafafa;
+  padding: 2em 1em;
+  text-align: center;
+}
+.hero-text { margin-bottom: 1em; }
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+}
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  transition: transform .3s ease, box-shadow .3s ease;
+  cursor: pointer;
+}
+.gallery-item img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+.gallery .btn { margin-top: 10px; cursor: pointer; }
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2em 1em;
+}
+
+.amenities-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+.amenities-list li {
+  display: flex; align-items: center;
+}
+.amenities-list i {
+  margin-right: 8px;
+  font-size: 1.2em;
+  color: #ff5a5f;
+  transition: transform .3s ease;
+}
+.amenities-list li:hover i {
+  transform: rotate(15deg) scale(1.1);
+}
+
+#map-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin-top: 1em;
+  border-radius: 8px;
+  overflow: hidden;
+}
+#map {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  transition: opacity .3s ease;
+}
+#map.interactive { pointer-events: auto; }
+#enable-map {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: .5em 1em;
+  background: rgba(255,255,255,.8);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background .3s ease;
+}
+#enable-map:hover { background: rgba(255,255,255,1); }
+
+.booking-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2em;
+  margin-top: 1em;
+}
+@media (max-width: 768px) {
+  .booking-content { grid-template-columns: 1fr; }
+}
+.booking-widget {
+  border: 1px solid #ddd;
+  padding: 1em;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,.1);
+  position: sticky;
+  top: 2em;
+}
+.price { font-size: 1.5em; font-weight: bold; margin-bottom: 1em; }
+.check-info { margin-bottom: .5em; }
+.guests { margin-bottom: 1em; }
+.guests label { margin-right: .5em; }
+
+.btn {
+  background: #ff5a5f;
+  color: #fff;
+  border: none;
+  padding: .8em 1.2em;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background .3s ease;
+}
+.btn:hover { background: #e14f50; }
+
+.cost-summary { margin-top: 1em; }
+.cost-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .5em;
+}
+.cost-row.total {
+  font-weight: bold;
+  border-top: 1px solid #ddd;
+  padding-top: .5em;
+}
+
+.gallery-grid .gallery-item:nth-child(n+5) {
+  display: none;
+}
+
+#photo-modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+  overflow-y: auto;
+  z-index: 1000;
+}
+#photo-modal.active { display: block; }
+body.modal-open { overflow: hidden; }
+#photo-modal .modal-header {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1em 2em;
+  border-bottom: 1px solid #ddd;
+  z-index: 1001;
+}
+#photo-modal .modal-header h3 { margin: 0; }
+#photo-modal #close-modal {
+  font-size: 1.5em;
+  border: none;
+  background: none;
+  cursor: pointer;
+  user-select: none;
+}
+#photo-modal #close-modal:hover { color: #ff5a5f; }
+#photo-modal .modal-body {
+  padding: 1em 2em 2em;
+}
+
+.tour-grid {
+  column-count: 2;
+  column-gap: 10px;
+  column-fill: balance;
+}
+.tour-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 10px;
+  break-inside: avoid;
+  border-radius: 8px;
+  transition: transform .3s ease, box-shadow .3s ease;
+  cursor: pointer;
+}
+.tour-grid img:hover {
+  transform: scale(1.01);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+@media (min-width: 1024px) {
+  .tour-grid {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+}
+
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+  z-index: 1002;
+}
+.lightbox-overlay.active {
+  display: flex;
+}
+.lightbox-img {
+  max-width: 90%;
+  max-height: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  border-radius: 4px;
+}
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next {
+  cursor: pointer;
+}
+.lightbox-close {
+  position: absolute;
+  top: 20px; right: 30px;
+  color: #fff;
+  font-size: 2em;
+  user-select: none;
+}
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 3em;
+  padding: 0 20px;
+  user-select: none;
+}
+.lightbox-prev { left: 10px; }
+.lightbox-next { right: 10px; }
