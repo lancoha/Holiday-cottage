@@ -5,16 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Holiday Cottage in Forest Paradise</title>
   <link rel="stylesheet" href="style.css" />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
 </head>
 <body>
   <header class="hero">
@@ -24,25 +16,41 @@
     </div>
     <div class="gallery section" id="gallery">
       <div class="gallery-grid">
-        <div class="gallery-item"><img src="images/1.png"  alt="Cottage exterior view" /></div>
-        <div class="gallery-item"><img src="images/3.jpg"  alt="Aerial view"            /></div>
-        <div class="gallery-item"><img src="images/4.jpg"  alt="Living area"           /></div>
-        <div class="gallery-item"><img src="images/5.jpg"  alt="Private sauna"         /></div>
         <div class="gallery-item">
-          <img src="images/10.jpg" alt="Cottage exterior view" />
-          <a href="#" class="overlay show-all">see more photos</a>
+          <a href="#photo-modal" class="photo-tour-link">
+            <img src="images/1.png" alt="Cottage exterior view">
+          </a>
         </div>
-        <div class="gallery-item"><img src="images/12.jpg" alt="Aerial view"            /></div>
-        <div class="gallery-item"><img src="images/13.jpg" alt="Living area"           /></div>
-        <div class="gallery-item"><img src="images/16.jpg" alt="Private sauna"         /></div>
-        <div class="gallery-item"><img src="images/17.jpg" alt="Cottage exterior view" /></div>
-        <div class="gallery-item"><img src="images/18.jpg" alt="Aerial view"            /></div>
-        <div class="gallery-item"><img src="images/19.jpg" alt="Living area"           /></div>
-        <div class="gallery-item"><img src="images/20.jpg" alt="Private sauna"         /></div>
-        <div class="gallery-item"><img src="images/21.jpg" alt="Cottage exterior view" /></div>
-        <div class="gallery-item"><img src="images/22.jpg" alt="Aerial view"            /></div>
-        <div class="gallery-item"><img src="images/23.jpg" alt="Living area"           /></div>
-        <div class="gallery-item"><img src="images/24.jpg" alt="Private sauna"         /></div>
+        <div class="gallery-item">
+          <a href="#photo-modal" class="photo-tour-link">
+            <img src="images/3.jpg" alt="Aerial view">
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="#photo-modal" class="photo-tour-link">
+            <img src="images/4.jpg" alt="Living area">
+          </a>
+        </div>
+        <div class="gallery-item">
+          <a href="#photo-modal" class="photo-tour-link">
+            <img src="images/5.jpg" alt="Private sauna">
+          </a>
+        </div>
+        <div class="gallery-item">
+          <img src="images/10.jpg" alt="Cottage exterior view">
+          <a href="#photo-modal" class="overlay show-all">see more photos</a>
+        </div>
+        <div class="gallery-item"><img src="images/12.jpg" alt="Aerial view"></div>
+        <div class="gallery-item"><img src="images/13.jpg" alt="Living area"></div>
+        <div class="gallery-item"><img src="images/16.jpg" alt="Private sauna"></div>
+        <div class="gallery-item"><img src="images/17.jpg" alt="Cottage exterior view"></div>
+        <div class="gallery-item"><img src="images/18.jpg" alt="Aerial view"></div>
+        <div class="gallery-item"><img src="images/19.jpg" alt="Living area"></div>
+        <div class="gallery-item"><img src="images/20.jpg" alt="Private sauna"></div>
+        <div class="gallery-item"><img src="images/21.jpg" alt="Cottage exterior view"></div>
+        <div class="gallery-item"><img src="images/22.jpg" alt="Aerial view"></div>
+        <div class="gallery-item"><img src="images/23.jpg" alt="Living area"></div>
+        <div class="gallery-item"><img src="images/24.jpg" alt="Private sauna"></div>
       </div>
     </div>
   </header>
@@ -79,12 +87,7 @@
     <section class="section location" id="location">
       <h3>Location</h3>
       <div id="map-container">
-        <iframe
-          id="map"
-          src="https://maps.google.com/maps?q=45.9220611,14.0452889&z=14&output=embed"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
+        <iframe id="map" src="https://maps.google.com/maps?q=45.9220611,14.0452889&z=14&output=embed" frameborder="0" allowfullscreen></iframe>
         <button id="enable-map">Enable map interaction</button>
       </div>
     </section>
@@ -94,15 +97,9 @@
       <div class="booking-content">
         <div id="calendar"></div>
         <div class="booking-widget">
-          <div class="price">
-            <span class="price-value">€128</span> <span>/night</span>
-          </div>
-          <div class="check-info">
-            <span>Check-in:</span> <span id="checkin">—</span>
-          </div>
-          <div class="check-info">
-            <span>Check-out:</span> <span id="checkout">—</span>
-          </div>
+          <div class="price"><span class="price-value">€128</span> <span>/night</span></div>
+          <div class="check-info"><span>Check-in:</span> <span id="checkin">—</span></div>
+          <div class="check-info"><span>Check-out:</span> <span id="checkout">—</span></div>
           <div class="guests">
             <label for="guests">Guests</label>
             <select id="guests">
@@ -114,18 +111,9 @@
           </div>
           <button id="reserve" class="btn reserve">Reserve</button>
           <div class="cost-summary">
-            <div class="cost-row">
-              <span>€<span id="cost-per-night">128</span> × <span id="nights">0</span> nights</span>
-              <span class="cost-total">€<span id="cost-total1">0.00</span></span>
-            </div>
-            <div class="cost-row">
-              <span>Service fee</span>
-              <span class="cost-total">€<span id="service-fee">0.00</span></span>
-            </div>
-            <div class="cost-row total">
-              <span>Total</span>
-              <span class="cost-total">€<span id="total">0.00</span></span>
-            </div>
+            <div class="cost-row"><span>€<span id="cost-per-night">128</span> × <span id="nights">0</span> nights</span><span class="cost-total">€<span id="cost-total1">0.00</span></span></div>
+            <div class="cost-row"><span>Service fee</span><span class="cost-total">€<span id="service-fee">0.00</span></span></div>
+            <div class="cost-row total"><span>Total</span><span class="cost-total">€<span id="total">0.00</span></span></div>
           </div>
         </div>
       </div>
@@ -133,35 +121,35 @@
   </main>
 
   <div id="photo-modal">
-    <div class="modal-header">
-      <h3>Photo tour</h3>
-      <button id="close-modal" aria-label="Close photo tour">&times;</button>
-    </div>
+<div class="modal-header">
+  <h3>Photo tour</h3>
+  <a href="#" id="close-modal">&times;</a>
+</div>
     <div class="modal-body">
       <div class="tour-grid">
-        <img src="images/1.png"  alt="Cottage exterior view 1" />
-        <img src="images/10.jpg" alt="Cottage exterior view 2" />
-        <img src="images/17.jpg" alt="Cottage exterior view 3" />
-        <img src="images/21.jpg" alt="Cottage exterior view 4" />
-        <img src="images/3.jpg"  alt="Aerial view 1" />
-        <img src="images/12.jpg" alt="Aerial view 2" />
-        <img src="images/18.jpg" alt="Aerial view 3" />
-        <img src="images/22.jpg" alt="Aerial view 4" />
-        <img src="images/4.jpg"  alt="Living area 1" />
-        <img src="images/13.jpg" alt="Living area 2" />
-        <img src="images/19.jpg" alt="Living area 3" />
-        <img src="images/23.jpg" alt="Living area 4" />
-        <img src="images/5.jpg"  alt="Private sauna 1" />
-        <img src="images/16.jpg" alt="Private sauna 2" />
-        <img src="images/20.jpg" alt="Private sauna 3" />
-        <img src="images/24.jpg" alt="Private sauna 4" />
+        <img src="images/1.png"  alt="Cottage exterior view 1">
+        <img src="images/10.jpg" alt="Cottage exterior view 2">
+        <img src="images/17.jpg" alt="Cottage exterior view 3">
+        <img src="images/21.jpg" alt="Cottage exterior view 4">
+        <img src="images/3.jpg"  alt="Aerial view 1">
+        <img src="images/12.jpg" alt="Aerial view 2">
+        <img src="images/18.jpg" alt="Aerial view 3">
+        <img src="images/22.jpg" alt="Aerial view 4">
+        <img src="images/4.jpg"  alt="Living area 1">
+        <img src="images/13.jpg" alt="Living area 2">
+        <img src="images/19.jpg" alt="Living area 3">
+        <img src="images/23.jpg" alt="Living area 4">
+        <img src="images/5.jpg"  alt="Private sauna 1">
+        <img src="images/16.jpg" alt="Private sauna 2">
+        <img src="images/20.jpg" alt="Private sauna 3">
+        <img src="images/24.jpg" alt="Private sauna 4">
       </div>
     </div>
   </div>
 
   <div id="lightbox" class="lightbox-overlay">
     <span class="lightbox-close">&times;</span>
-    <img class="lightbox-img" src="" alt="" />
+    <img class="lightbox-img" src="" alt="">
     <button class="lightbox-prev">&#10094;</button>
     <button class="lightbox-next">&#10095;</button>
   </div>
