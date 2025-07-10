@@ -29,14 +29,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  const map = document.getElementById('map');
-  document.getElementById('enable-map').addEventListener('click', (evt) => {
-    map.classList.toggle('interactive');
-    evt.target.textContent = map.classList.contains('interactive')
-      ? 'Disable map interaction'
-      : 'Enable map interaction';
-  });
-
   const PRICE = 128;
   flatpickr("#calendar", {
     mode: "range",
@@ -97,23 +89,138 @@ document.addEventListener('DOMContentLoaded', () => {
     lightbox.classList.add('active');
   }
   function closeLightbox() {
-    lightbox.classList.remove('active');
-  }
-  function showPrev() {
-    currentIndex = (currentIndex - 1 + galleryImgs.length) % galleryImgs.length;
-    lbImg.src = galleryImgs[currentIndex].src;
-  }
-  function showNext() {
-    currentIndex = (currentIndex + 1) % galleryImgs.length;
-    lbImg.src = galleryImgs[currentIndex].src;
-  }
+  lightbox.classList.add('closing');
+  lbImg.classList.add('closing');
+
+  lightbox.addEventListener('animationend', () => {
+    lightbox.classList.remove('active', 'closing');
+    lbImg.classList.remove('closing');
+  }, { once: true });
+}
+const layers   = lightbox.querySelectorAll('.lightbox-img');
+let front      = 0;
+
+function openLightbox() {
+  layers[front].src = galleryImgs[currentIndex].src;
+  layers[front].classList.add('show');
+  lightbox.classList.add('active');
+}
+
+function changeImage(step){
+  const next = (currentIndex + step + galleryImgs.length) % galleryImgs.length;
+  const back = 1 - front;
+
+  layers[back].src = galleryImgs[next].src;
+  layers[back].classList.add('show');
+  layers[back].classList.remove('hidden');
+
+  layers[front].classList.remove('show');
+
+
+  layers[front].addEventListener('transitionend', function tEnd(e){
+    if(e.propertyName !== 'opacity') return;
+    layers[front].removeEventListener('transitionend', tEnd);
+
+    layers[front].classList.add('hidden');
+    front = back;
+    currentIndex = next;
+  }, { once:true });
+}
+
+  btnPrev.addEventListener('click', () => changeImage(-1));
+  btnNext.addEventListener('click', () => changeImage(+1));
 
   btnClose.addEventListener('click', closeLightbox);
-  btnPrev .addEventListener('click', showPrev);
-  btnNext .addEventListener('click', showNext);
   lightbox.addEventListener('click', e => {
     if (e.target === lightbox) closeLightbox();
   });
 
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+  const btn   = document.getElementById('toggle-amenities');
+  const box   = document.querySelector('.more-amenities');
+  const label = btn.querySelector('.btn-label');
+  const icon  = btn.querySelector('i');
+
+  btn.addEventListener('click', () => {
+    const isOpen = box.classList.contains('open');
+
+    if (isOpen) {
+      box.style.height = box.scrollHeight + 'px';
+      requestAnimationFrame(() => box.style.height = '0');
+      label.textContent = 'See more';
+      icon.className = 'fas fa-chevron-down';
+    } else {
+      const full = box.scrollHeight;
+      box.style.height = '0';
+      box.classList.add('open');
+      requestAnimationFrame(() => box.style.height = full + 'px');
+      label.textContent = 'See less';
+      icon.className = 'fas fa-chevron-up';
+    }
+    box.addEventListener('transitionend', function tidy(e){
+      if (e.propertyName !== 'height') return;
+      box.style.height = '';
+      if (!isOpen) box.classList.add('open'); else box.classList.remove('open');
+      box.removeEventListener('transitionend', tidy);
+    }, { once:true });
+  });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const dBtn   = document.getElementById('toggle-desc');
+  const dBox   = document.querySelector('.desc-more');
+  const dLab   = dBtn.querySelector('.btn-label');
+  const dIcon  = dBtn.querySelector('i');
+
+  dBtn.addEventListener('click', () => {
+    const open = dBox.classList.contains('open');
+
+    if (open) {
+      dBox.style.height = dBox.scrollHeight + 'px';
+      requestAnimationFrame(()=> dBox.style.height = '0');
+      dLab.textContent = 'See more';
+      dIcon.className  = 'fas fa-chevron-down';
+    } else {
+      dBox.style.height = '0';
+      dBox.classList.add('open');
+      requestAnimationFrame(()=>{
+        dBox.style.height = dBox.scrollHeight + 'px';
+      });
+      dLab.textContent = 'See less';
+      dIcon.className  = 'fas fa-chevron-up';
+    }
+
+    dBox.addEventListener('transitionend', function tidy(e){
+      if(e.propertyName !== 'height') return;
+      dBox.style.height = '';
+      dBox.classList.toggle('open', !open);
+      dBox.removeEventListener('transitionend', tidy);
+    }, { once:true });
+  });
+});
+
+const nBtn  = document.getElementById('toggle-nearby');
+const nBox  = document.querySelector('.nearby-more');
+const nLab  = nBtn.querySelector('.btn-label');
+const nIcon = nBtn.querySelector('i');
+
+nBtn.addEventListener('click', () => {
+  const opening = !nBox.classList.contains('open');
+  const hTarget = opening ? nBox.scrollHeight : 0;
+
+  nBox.style.height = opening ? '0' : nBox.scrollHeight + 'px';
+  requestAnimationFrame(()=> nBox.style.height = hTarget + 'px');
+
+  nBox.addEventListener('transitionend', function tidy(e){
+    if(e.propertyName !== 'height') return;
+    nBox.style.height = '';
+    nBox.classList.toggle('open', opening);
+    nBox.removeEventListener('transitionend', tidy);
+  }, { once:true });
+
+  nLab.textContent = opening ? 'See less' : 'See more';
+  nIcon.className  = opening ? 'fas fa-chevron-up'
+                             : 'fas fa-chevron-down';
+});

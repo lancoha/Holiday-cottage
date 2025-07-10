@@ -112,22 +112,8 @@ main {
 #map {
   width: 100%;
   height: 100%;
-  pointer-events: none;
   transition: opacity .3s ease;
 }
-#map.interactive { pointer-events: auto; }
-#enable-map {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  padding: .5em 1em;
-  background: rgba(255,255,255,.8);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background .3s ease;
-}
-#enable-map:hover { background: rgba(255,255,255,1); }
 
 .booking-content {
   display: grid;
@@ -179,7 +165,6 @@ main {
 }
 
 #photo-modal {
-  display: none;
   position: fixed;
   top: 0; left: 0;
   width: 100vw;
@@ -187,9 +172,26 @@ main {
   background: #fff;
   overflow-y: auto;
   z-index: 1000;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(.93);
+  pointer-events: none;
+
+  transition: opacity .4s ease, transform .4s ease, visibility 0s .4s;
 }
-#photo-modal.active { display: block; }
+
+#photo-modal.active,
+#photo-modal:target {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  pointer-events: auto;
+  transition: opacity .4s ease, transform .4s ease;
+}
+
 body.modal-open { overflow: hidden; }
+
 #photo-modal .modal-header {
   position: sticky;
   top: 0;
@@ -214,7 +216,6 @@ body.modal-open { overflow: hidden; }
 #photo-modal .modal-body {
   padding: 1em 2em 2em;
 }
-
 .tour-grid {
   column-count: 2;
   column-gap: 10px;
@@ -319,32 +320,30 @@ html:has(#photo-modal:target),body:has(#photo-modal:target){overflow:hidden}
   transform-origin:center;
 }
 
-#photo-modal:target{
-  display:block;
-  animation:modalIn .4s ease both;
-}
-
 #photo-modal:target .tour-grid img{
   opacity:0;
   animation:imageIn .35s ease forwards;
 }
 
-#photo-modal:target .tour-grid img:nth-child(1){animation-delay:.4s}
-#photo-modal:target .tour-grid img:nth-child(2){animation-delay:.5s}
-#photo-modal:target .tour-grid img:nth-child(3){animation-delay:.6s}
-#photo-modal:target .tour-grid img:nth-child(4){animation-delay:.7s}
-#photo-modal:target .tour-grid img:nth-child(5){animation-delay:.8s}
-#photo-modal:target .tour-grid img:nth-child(6){animation-delay:.9s}
-#photo-modal:target .tour-grid img:nth-child(7){animation-delay:1s}
-#photo-modal:target .tour-grid img:nth-child(8){animation-delay:1.1s}
-#photo-modal:target .tour-grid img:nth-child(9){animation-delay:1.2s}
-#photo-modal:target .tour-grid img:nth-child(10){animation-delay:1.3s}
-#photo-modal:target .tour-grid img:nth-child(11){animation-delay:1.4s}
-#photo-modal:target .tour-grid img:nth-child(12){animation-delay:1.5s}
-#photo-modal:target .tour-grid img:nth-child(13){animation-delay:1.6s}
-#photo-modal:target .tour-grid img:nth-child(14){animation-delay:1.7s}
-#photo-modal:target .tour-grid img:nth-child(15){animation-delay:1.8s}
-#photo-modal:target .tour-grid img:nth-child(16){animation-delay:1.9s}
+#photo-modal:target .tour-grid img:nth-child(1) { animation-delay: .4s }
+#photo-modal:target .tour-grid img:nth-child(2) { animation-delay: .5s }
+#photo-modal:target .tour-grid img:nth-child(3) { animation-delay: .6s }
+#photo-modal:target .tour-grid img:nth-child(4) { animation-delay: .7s }
+#photo-modal:target .tour-grid img:nth-child(5) { animation-delay: .8s }
+#photo-modal:target .tour-grid img:nth-child(6) { animation-delay: .9s }
+#photo-modal:target .tour-grid img:nth-child(7) { animation-delay: 1.0s }
+#photo-modal:target .tour-grid img:nth-child(8) { animation-delay: 1.1s }
+
+#photo-modal:target .tour-grid img:nth-child(9)  { animation-delay: .9s }
+#photo-modal:target .tour-grid img:nth-child(10) { animation-delay: 1.0s }
+#photo-modal:target .tour-grid img:nth-child(11) { animation-delay: 1.1s }
+#photo-modal:target .tour-grid img:nth-child(12) { animation-delay: 1.2s }
+#photo-modal:target .tour-grid img:nth-child(13) { animation-delay: 1.3s }
+#photo-modal:target .tour-grid img:nth-child(14) { animation-delay: 1.4s }
+#photo-modal:target .tour-grid img:nth-child(15) { animation-delay: 1.5s }
+#photo-modal:target .tour-grid img:nth-child(16) { animation-delay: 1.6s }
+
+
 
 @keyframes imageIn{
   0%{opacity:0}
@@ -361,8 +360,130 @@ html:has(#photo-modal:target),body:has(#photo-modal:target){overflow:hidden}
   100%{transform:scale(1);opacity:1}
 }
 
-.lightbox-overlay.active .lightbox-img{
-  animation:zoomIn .35s ease both;
-  transform-origin:center;
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
 }
+
+.lightbox-overlay.closing {
+  animation: fadeOut .35s ease forwards;
+}
+
+.lightbox-img.closing {
+  animation: fadeOut .35s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.lightbox-overlay.active:not(.closing) {
+  animation: fadeIn .35s ease forwards;
+}
+
+.lightbox-img.fade-in {
+  animation: fadeIn .35s ease forwards;
+}
+
+.lightbox-img{
+  position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  max-width:90%; max-height:90%;
+  border-radius:4px;
+  box-shadow:0 4px 20px rgba(0,0,0,.5);
+  transition:opacity .25s ease;
+  opacity:0;
+}
+
+.lightbox-img.fading {
+  opacity: 0;
+}
+
+.lightbox-prev,
+.lightbox-next{ z-index: 2; }
+
+.lightbox-img.show   { opacity:1; }
+.lightbox-img.hidden { opacity:0; }
+
+.lightbox-prev, .lightbox-next{ z-index:3; }
+
+.amenities-grid,
+.more-amenities{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1.2em;
+}
+
+@media(max-width:900px){
+  .amenities-grid,
+  .more-amenities{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+
+@media(max-width:600px){
+  .amenities-grid,
+  .more-amenities{
+    grid-template-columns:1fr;
+  }
+}
+
+.more-amenities{
+  height:0;
+  overflow:hidden;
+  transition:height .35s ease;
+}
+
+.more-amenities.open{
+}
+
+.more-btn{margin-top:1em}
+
+.more-btn{
+  margin:1em auto;
+  display:flex;
+  align-items:center;
+  gap:.4em;
+}
+
+.more-amenities.open{
+  height:auto;
+}
+
+.desc-more{
+  height:0;
+  overflow:hidden;
+  transition:height .35s ease;
+}
+
+.desc-more.open{height:auto}
+
+.nearby-grid,
+.nearby-more{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1.2em;
+}
+
+@media(max-width:900px){
+  .nearby-grid,
+  .nearby-more{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:600px){
+  .nearby-grid,
+  .nearby-more{grid-template-columns:1fr}
+}
+
+.nearby-grid p{margin:0;line-height:1.45}
+.nearby-grid i{margin-right:8px;color:#ff5a5f}
+
+.nearby-more{
+  height:0;
+  overflow:hidden;
+  transition:height .35s ease;
+}
+.nearby-more.open{height:auto}
 
