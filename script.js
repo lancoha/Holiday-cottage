@@ -208,15 +208,30 @@ const nIcon = nBtn.querySelector('i');
 
 nBtn.addEventListener('click', () => {
   const opening = !nBox.classList.contains('open');
-  const hTarget = opening ? nBox.scrollHeight : 0;
 
-  nBox.style.height = opening ? '0' : nBox.scrollHeight + 'px';
-  requestAnimationFrame(()=> nBox.style.height = hTarget + 'px');
+  if (opening) {
+    nBox.classList.add('open');
+    nBox.style.height = '0';
+    const full = nBox.scrollHeight;
+    requestAnimationFrame(() => {
+      nBox.style.height = full + 'px';
+    });
+
+  } else {
+    const full = nBox.scrollHeight;
+    nBox.style.height = full + 'px';
+
+    nBox.classList.remove('open');
+
+    requestAnimationFrame(() => {
+      nBox.style.height = '0';
+    });
+  }
 
   nBox.addEventListener('transitionend', function tidy(e){
-    if(e.propertyName !== 'height') return;
+    if (e.propertyName !== 'height') return;
     nBox.style.height = '';
-    nBox.classList.toggle('open', opening);
+    nBox.style.paddingTop = '';
     nBox.removeEventListener('transitionend', tidy);
   }, { once:true });
 

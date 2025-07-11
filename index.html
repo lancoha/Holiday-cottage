@@ -7,6 +7,11 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+  <script src="distance.js"></script>
+  <script async
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP9Zv4lUSi_2w9Hg0TKdPGqQgq7af_lu0&callback=initDistanceTool">
+  </script>
+
 </head>
 <body>
   <header class="hero">
@@ -104,123 +109,217 @@
 
 <section class="section amenities" id="amenities">
   <h3>What this place offers</h3>
+
   <div class="amenities-grid">
-    <p><i class="fas fa-bath"></i><strong>Bathroom</strong><br>
-       Hair dryer<br>Cleaning products<br>Shampoo<br>Body soap<br>
-       Hot water<br>Shower gel</p>
+    <div>
+      <h4><i class="fas fa-bath"></i> Bathroom</h4>
+      <ul>
+        <li>Hair dryer</li>
+        <li>Cleaning products</li>
+        <li>Shampoo</li>
+        <li>Body soap</li>
+        <li>Hot water</li>
+        <li>Shower gel</li>
+      </ul>
+    </div>
 
-    <p><i class="fas fa-bed"></i><strong>Bedroom and laundry</strong><br>
-       Free washer – in unit<br>Free dryer – in building<br>
-       Essentials (towels, bed sheets, soap, toilet paper)<br>
-       Hangers<br>Bed linens<br>Iron<br>Drying rack for clothing<br>
-       Mosquito net</p>
+    <div>
+      <h4><i class="fas fa-bed"></i> Bedroom and laundry</h4>
+      <ul>
+        <li>Free washer – in unit</li>
+        <li>Free dryer – in building</li>
+        <li>Essentials </li>
+        <li>Hangers</li>
+        <li>Bed linens</li>
+        <li>Iron</li>
+        <li>Drying rack for clothing</li>
+        <li>Mosquito net</li>
+      </ul>
+    </div>
 
-    <p><i class="fas fa-gamepad"></i><strong>Entertainment</strong><br>
-       Ethernet connection<br>HDTV with premium cable<br>
-       Sound system<br>Arcade games</p>
+        <div>
+      <h4><i class="fas fa-utensils"></i> Kitchen and dining</h4>
+      <ul>
+        <li>Kitchen (space for cooking)</li>
+        <li>Refrigerator</li>
+        <li>Microwave</li>
+        <li>Cooking basics (pots, pans, oil…)</li>
+        <li>Dishes & silverware</li>
+        <li>Freezer • Dishwasher • Induction stove • Oven</li>
+        <li>Hot-water kettle • Coffee maker</li>
+        <li>Wine glasses • Toaster</li>
+        <li>Barbecue utensils • Coffee</li>
+      </ul>
+    </div>
   </div>
-
+  
   <div class="amenities-grid more-amenities">
-    <p><i class="fas fa-child"></i><strong>Family</strong><br>
-       Outlet covers</p>
+    <div>
+      <h4><i class="fas fa-child"></i> Family</h4>
+      <ul><li>Outlet covers</li></ul>
+    </div>
 
-    <p><i class="fas fa-thermometer-half"></i><strong>Heating and cooling</strong><br>
-       AC – split-type ductless<br>Portable heater<br>Radiant heating<br>
-       Heating – split-type ductless</p>
+    <div>
+      <h4><i class="fas fa-thermometer-half"></i> Heating and cooling</h4>
+      <ul>
+        <li>AC – split-type ductless</li>
+        <li>Portable heater</li>
+        <li>Radiant heating</li>
+        <li>Heating – split-type ductless</li>
+      </ul>
+    </div>
 
-    <p><i class="fas fa-shield-alt"></i><strong>Home safety</strong><br>
-       Smoke alarm<br>Fire extinguisher<br>First aid kit</p>
+    <div>
+      <h4><i class="fas fa-shield-alt"></i> Home safety</h4>
+      <ul>
+        <li>Smoke alarm</li>
+        <li>Fire extinguisher</li>
+        <li>First aid kit</li>
+      </ul>
+    </div>
 
-    <p><i class="fas fa-wifi"></i><strong>Internet and office</strong><br>
-       Wifi</p>
+    <div>
+      <h4><i class="fas fa-gamepad"></i> Entertainment</h4>
+      <ul>
+        <li>Ethernet connection</li>
+        <li>HDTV with premium cable</li>
+        <li>Sound system</li>
+        <li>Arcade games</li>
+      </ul>
+    </div>
+  
 
-    <p><i class="fas fa-utensils"></i><strong>Kitchen and dining</strong><br>
-       Kitchen (space for cooking)<br>Refrigerator<br>Microwave<br>
-       Cooking basics (pots, pans, oil, salt, pepper)<br>
-       Dishes &amp; silverware (bowls, plates, cups …)<br>
-       Freezer<br>Dishwasher<br>Induction stove<br>Oven<br>
-       Hot-water kettle<br>Coffee maker (french press, Nespresso)<br>
-       Wine glasses<br>Toaster<br>Barbecue utensils (grill, charcoal, skewers)<br>
-       Coffee</p>
+    <div>
+      <h4><i class="fas fa-utensils"></i> Kitchen and dining</h4>
+      <ul>
+        <li>Kitchen (space for cooking)</li>
+        <li>Refrigerator</li>
+        <li>Microwave</li>
+        <li>Cooking basics (pots, pans, oil…)</li>
+        <li>Dishes & silverware</li>
+        <li>Freezer • Dishwasher • Induction stove • Oven</li>
+        <li>Hot-water kettle • Coffee maker</li>
+        <li>Wine glasses • Toaster</li>
+        <li>Barbecue utensils • Coffee</li>
+      </ul>
+    </div>
 
-    <p><i class="fas fa-door-open"></i><strong>Location features</strong><br>
-       Private entrance</p>
+    <div>
+      <h4><i class="fas fa-door-open"></i> Location features</h4>
+      <ul><li>Private entrance</li></ul>
+    </div>
 
-    <p><i class="fas fa-tree"></i><strong>Outdoor</strong><br>
-       Private patio or balcony<br>Backyard (grassy area)<br>
-       Outdoor furniture<br>Hammock<br>Outdoor dining area<br>
-       BBQ grill<br>Sun loungers</p>
+    <div>
+      <h4><i class="fas fa-tree"></i> Outdoor</h4>
+      <ul>
+        <li>Private patio or balcony</li>
+        <li>Backyard (grassy area)</li>
+        <li>Outdoor furniture • Hammock</li>
+        <li>Outdoor dining area • BBQ grill</li>
+        <li>Sun loungers</li>
+      </ul>
+    </div>
 
-    <p><i class="fas fa-car"></i><strong>Parking and facilities</strong><br>
-       Free carport on premises – 2 spaces<br>Private sauna</p>
+    <div>
+      <h4><i class="fas fa-car"></i> Parking & facilities</h4>
+      <ul><li>Free carport – 2 spaces • Private sauna</li></ul>
+    </div>
 
-    <p><i class="fas fa-concierge-bell"></i><strong>Services</strong><br>
-       Pets allowed (assistance animals always allowed)<br>
-       Luggage drop-off allowed (early arrival/late departure)<br>
-       Long-term stays allowed (28 days+)<br>
-       Self check-in – smart lock</p>
+    <div>
+      <h4><i class="fas fa-concierge-bell"></i> Services</h4>
+      <ul>
+        <li>Pets allowed</li>
+        <li>Luggage drop-off allowed</li>
+        <li>Long-term stays allowed</li>
+        <li>Self check-in – smart lock</li>
+      </ul>
+    </div>
   </div>
 
   <button id="toggle-amenities" class="btn more-btn">
-  <span class="btn-label">See more</span>
-  <i class="fas fa-chevron-down"></i>
-</button>
+    <span class="btn-label">See more</span>
+    <i class="fas fa-chevron-down"></i>
+  </button>
 </section>
-
     <section class="section location" id="location">
       <h3>Location</h3>
         <div id="map-container">
           <iframe
             id="map"
-            src="https://maps.google.com/maps?q=45.961816,14.035085&z=8&output=embed"
+            src="https://maps.google.com/maps?q=45.961804,14.035149&z=8&output=embed"
             frameborder="0"
             allowfullscreen>
           </iframe>
         </div>
     </section>
+    <section id="distance-tool" class="section">
+  <h2>How far is it?</h2>
+  <form id="distance-form" class="distance-form">
+    <input
+      id="dest-input"
+      type="text"
+      placeholder="Enter a place or address"
+      required
+    >
+    <button type="submit" class="btn">Show distance</button>
+  </form>
+  <p id="distance-result" class="distance-result"></p>
+</section>
 <section class="section nearby" id="nearby">
   <h3>What’s nearby</h3>
 
   <div class="nearby-grid">
-    <p>
-      <i class="fas fa-person-hiking"></i><strong>Sights & nature</strong><br>
-      Anthony’s Shaft Mercury Mine – 9 km<br>
-      Wild Lake Nature Reserve – 8 km
-    </p>
+    <div>
+      <h4><i class="fas fa-person-hiking"></i> Sights & nature</h4>
+      <ul>
+        <li>Anthony’s Shaft Mercury Mine – 9 km</li>
+        <li>Wild Lake Nature Reserve – 8 km</li>
+      </ul>
+    </div>
 
-    <p>
-      <i class="fas fa-city"></i><strong>Nearby towns & cities</strong><br>
-      Idrija – 9 km<br>
-      Ljubljana – 52 km
-    </p>
+    <div>
+      <h4><i class="fas fa-city"></i> Nearby towns & cities</h4>
+      <ul>
+        <li>Idrija – 9 km</li>
+        <li>Ljubljana – 52 km</li>
+      </ul>
+    </div>
 
-    <p>
-      <i class="fas fa-plane-departure"></i><strong>Nearest airports</strong><br>
-      Ljubljana (LJU) – 42 km<br>
-      Trieste (TRS) – 47 km
-    </p>
+    <div>
+      <h4><i class="fas fa-plane-departure"></i> Nearest airports</h4>
+      <ul>
+        <li>Ljubljana (LJU) – 42 km</li>
+        <li>Trieste (TRS) – 47 km</li>
+      </ul>
+    </div>
   </div>
-<br>
+
   <div class="nearby-grid nearby-more">
-    <p>
-      <i class="fas fa-mountain"></i><strong>Hiking trails</strong><br>
-      Via Alpina Red Trail (starts on site) – 0 km<br>
-      Javornik Peak – 4 km<br>
-      Hleviška Planina – 7 km
-    </p>
+    <div>
+      <h4><i class="fas fa-mountain"></i> Hiking trails</h4>
+      <ul>
+        <li>Via Alpina Red Trail – on site</li>
+        <li>Javornik Peak – 4 km</li>
+        <li>Hleviška Planina – 7 km</li>
+      </ul>
+    </div>
 
-    <p>
-      <i class="fas fa-water"></i><strong>Adriatic coast & beaches</strong><br>
-      Koper – 80 km<br>
-      Izola Beach – 88 km<br>
-      Piran – 99 km
-    </p>
+    <div>
+      <h4><i class="fas fa-water"></i> Adriatic coast & beaches</h4>
+      <ul>
+        <li>Koper – 80 km</li>
+        <li>Izola Beach – 88 km</li>
+        <li>Piran – 99 km</li>
+      </ul>
+    </div>
 
-    <p>
-      <i class="fas fa-shopping-basket"></i><strong>Grocery stores</strong><br>
-      Mercator Idrija – 9 km<br>
-      Spar Idrija – 9 km
-    </p>
+    <div>
+      <h4><i class="fas fa-shopping-basket"></i> Grocery stores</h4>
+      <ul>
+        <li>Mercator Idrija – 9 km</li>
+        <li>Spar Idrija – 9 km</li>
+      </ul>
+    </div>
   </div>
 
   <button id="toggle-nearby" class="btn more-btn">
@@ -232,7 +331,6 @@
     <section class="section booking" id="booking">
       <h3>Availability</h3>
       <div class="booking-content">
-        <div id="calendar"></div>
         <div class="booking-widget">
           <div class="price"><span class="price-value">€128</span> <span>/night</span></div>
           <div class="check-info"><span>Check-in:</span> <span id="checkin">—</span></div>
@@ -253,6 +351,7 @@
             <div class="cost-row total"><span>Total</span><span class="cost-total">€<span id="total">0.00</span></span></div>
           </div>
         </div>
+        <div id="calendar"></div>
       </div>
     </section>
   </main>
