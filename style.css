@@ -582,3 +582,30 @@ html:has(#photo-modal:target),body:has(#photo-modal:target){overflow:hidden}
 #distance-tool {
   padding-bottom: 1.5em; 
 }
+
+.booking-widget .field {
+  margin-bottom: 0.75em;
+}
+.booking-widget .field label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.3em;
+}
+.booking-widget .field input,
+.booking-widget .field select {
+  width: 100%;
+  padding: 0.6em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.booking-widget .field textarea#message {
+  width: 100%;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-bottom: 1em;
+  resize: vertical;
+}

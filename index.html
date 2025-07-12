@@ -4,13 +4,17 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Holiday Cottage in Forest Paradise</title>
-  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/ical.js/1.4.0/ical.min.js"
+    defer
+  ></script>
   <script src="distance.js"></script>
   <script async
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBP9Zv4lUSi_2w9Hg0TKdPGqQgq7af_lu0&callback=initDistanceTool">
   </script>
+  <link rel="stylesheet" href="style.css" />
 
 </head>
 <body>
@@ -332,25 +336,62 @@
       <h3>Availability</h3>
       <div class="booking-content">
         <div class="booking-widget">
-          <div class="price"><span class="price-value">€128</span> <span>/night</span></div>
-          <div class="check-info"><span>Check-in:</span> <span id="checkin">—</span></div>
-          <div class="check-info"><span>Check-out:</span> <span id="checkout">—</span></div>
-          <div class="guests">
-            <label for="guests">Guests</label>
-            <select id="guests">
-              <option>1 guest</option>
-              <option selected>2 guests</option>
-              <option>3 guests</option>
-              <option>4 guests</option>
-            </select>
-          </div>
-          <button id="reserve" class="btn reserve">Reserve</button>
-          <div class="cost-summary">
-            <div class="cost-row"><span>€<span id="cost-per-night">128</span> × <span id="nights">0</span> nights</span><span class="cost-total">€<span id="cost-total1">0.00</span></span></div>
-            <div class="cost-row"><span>Service fee</span><span class="cost-total">€<span id="service-fee">0.00</span></span></div>
-            <div class="cost-row total"><span>Total</span><span class="cost-total">€<span id="total">0.00</span></span></div>
-          </div>
-        </div>
+  <form id="inquiry-form">
+    <!-- Polja za uporabnika -->
+    <div class="field">
+      <label for="first-name">First name</label>
+      <input id="first-name" type="text" required />
+    </div>
+    <div class="field">
+      <label for="last-name">Last name</label>
+      <input id="last-name" type="text" required />
+    </div>
+    <div class="field">
+      <label for="email">Email</label>
+      <input id="email" type="email" required />
+    </div>
+    <div class="field">
+      <label for="guests">Guests</label>
+      <select id="guests">
+        <option>1 guest</option>
+        <option selected>2 guests</option>
+        <option>3 guests</option>
+        <option>4 guests</option>
+      </select>
+    </div>
+    <div class="field">
+      <label for="pets">Pets</label>
+      <input id="pets" type="number" min="0" value="0" />
+    </div>
+    <div class="field">
+      <label for="message">Message to host</label>
+      <textarea id="message" rows="4" placeholder="Your message…"></textarea>
+    </div>
+    
+    <div class="check-info"><span>Check-in:</span> <span id="checkin">—</span></div>
+    <div class="check-info"><span>Check-out:</span> <span id="checkout">—</span></div>
+
+    <div class="cost-summary">
+      <div class="cost-row">
+        <span>€<span id="cost-per-night">100</span> × <span id="nights">0</span> nights</span>
+        <span class="cost-total">€<span id="cost-total1">0.00</span></span>
+      </div>
+      <div class="cost-row">
+        <span>Pet fee</span>
+        <span class="cost-total">€<span id="service-fee">0.00</span></span>
+      </div>
+      <div class="cost-row total">
+        <span>Total</span>
+        <span class="cost-total">€<span id="total">0.00</span></span>
+      </div>
+    </div>
+
+    <button type="submit" id="send-inquiry" class="btn reserve">
+      Send Inquiry
+    </button>
+  </form>
+</div>
+
         <div id="calendar"></div>
       </div>
     </section>

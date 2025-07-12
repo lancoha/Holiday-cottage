@@ -29,13 +29,65 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  const PRICE = 128;
-  flatpickr("#calendar", {
-    mode: "range",
-    inline: true,
-    minDate: "today",
-    onChange: dates => updateBooking(dates)
-  });
+  const PRICE = 100;
+const FEEDS = [
+    'https://www.airbnb.si/calendar/ical/1128748175756155149.ics?s=7a4723f15a9dbc32ada0a672da93fe4a',
+    'https://ical.booking.com/v1/export?t=767b718a-6929-44f7-8c09-3a84b52e86e8'
+  ];
+
+  const proxy = url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+
+async function fetchFeed(url) {
+  try {
+    const res = await fetch(proxy(url));
+    if (!res.ok) throw new Error(res.status + ' ' + res.statusText);
+    const ics  = await res.text();
+    const jcal = ICAL.parse(ics);
+    const comp = new ICAL.Component(jcal);
+    return comp.getAllSubcomponents('vevent').map(v => {
+      const e    = new ICAL.Event(v);
+      const from = e.startDate.toJSDate();
+      const to   = e.endDate.toJSDate();
+      to.setDate(to.getDate() - 1);
+      return { from, to };
+    });
+  } catch (err) {
+    console.error('ICS feed failed:', url, err);
+    return [];
+  }
+}
+
+  function mergeRanges(ranges){
+    if(!ranges.length) return [];
+    ranges.sort((a,b)=>a.from-b.from);
+    const merged=[ranges[0]];
+    for(const r of ranges.slice(1)){
+      const last = merged[merged.length-1];
+      if(r.from<=last.to.setHours(23,59,59,999)+1){ 
+        last.to = new Date(Math.max(last.to, r.to));
+      }else{
+        merged.push(r);
+      }
+    }
+    return merged;
+  }
+
+(async () => {
+  let disabled = [];
+  try {
+    const all = (await Promise.all(FEEDS.map(fetchFeed))).flat();
+    disabled   = mergeRanges(all);
+  } finally { 
+    flatpickr('#calendar', {
+      mode    : 'range',
+      inline  : true,
+      minDate : 'today',
+      disable : disabled,
+      onChange: dates => updateBooking(dates)
+    });
+  }
+})();
+
 
   function updateBooking(dates) {
     const ci    = document.getElementById('checkin'),
@@ -51,23 +103,53 @@ document.addEventListener('DOMContentLoaded', () => {
       co.textContent = end.toLocaleDateString();
       const n = Math.round((end - start)/(1000*60*60*24));
       nights.textContent = n;
-      const c = n*PRICE;
+      const c = n * PRICE;
       cost1.textContent = c.toFixed(2);
-      const fee = c*0.1725;
-      svc.textContent = fee.toFixed(2);
-      tot.textContent = (c+fee).toFixed(2);
-    }
+
+      const pets = parseInt(document.getElementById('pets').value, 10) || 0;
+      const petFee = pets * 10 * n;
+      svc.textContent = petFee.toFixed(2);
+      tot.textContent = (c + petFee).toFixed(2);
+
+         }
+        }
+
+const form = document.getElementById('inquiry-form');
+form.addEventListener('submit', e => {
+  e.preventDefault();
+
+  const first  = document.getElementById('first-name').value.trim();
+  const last   = document.getElementById('last-name').value.trim();
+  const email  = document.getElementById('email').value.trim();
+  const guests = document.getElementById('guests').value;
+  const pets   = document.getElementById('pets').value;
+  const message = document.getElementById('message').value.trim();
+  const ci     = document.getElementById('checkin').textContent;
+  const co     = document.getElementById('checkout').textContent;
+  const total  = document.getElementById('total').textContent;
+
+  if (!first || !last || !email || ci==='—' || co==='—') {
+    alert('Please fill in name, email and select dates.');
+    return;
   }
 
-  document.getElementById('reserve').addEventListener('click', () => {
-    const ci = document.getElementById('checkin').textContent,
-          co = document.getElementById('checkout').textContent;
-    if (ci === '—' || co === '—') {
-      alert('Please select your check-in and check-out dates.');
-    } else {
-      alert(`Reservation requested from ${ci} to ${co}.`);
-    }
-  });
+  const body = encodeURIComponent(
+    `Inquiry for Holiday Cottage\n\n` +
+    `Name: ${first} ${last}\n` +
+    `Email: ${email}\n` +
+    `Guests: ${guests}\n` +
+    `Pets: ${pets}\n` +
+    
+    `Check-in: ${ci}\n` +
+    `Check-out: ${co}\n` +
+    `Total: €${total}\n\n` +
+    `Thank you!`
+  );
+
+  window.location.href = 
+    `mailto:you@yourdomain.com?subject=${encodeURIComponent('Cottage Inquiry')}&body=${body}`;
+});
+
 
   const galleryImgs = Array.from(document.querySelectorAll('.tour-grid img'));
   const lightbox     = document.getElementById('lightbox');
